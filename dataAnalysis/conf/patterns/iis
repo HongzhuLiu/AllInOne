@@ -1,0 +1,4 @@
+COOKIE_ID [iI][dD]=([0-9.]*-[0-9]*|\w*)
+COOKIE \S*?(%{COOKIE_ID:cookie_id}\S*)?
+iis_log %{TIMESTAMP_ISO8601:@timestamp} %{WORD:server_site_name} %{HOST:server_computer_name} %{IP:server_ip} %{WORD:method} %{URIPATH:cs_uri_stem} %{NOTSPACE:cs_uri_query} %{NUMBER:server_port} %{NOTSPACE:cs_username} %{IP:client_ip} %{NOTSPACE:cs_version} %{NOTSPACE:user_agent} %{COOKIE:cookie} %{NOTSPACE:referer} %{NOTSPACE:cs_host} %{NUMBER:sc_status} %{NUMBER:sc_substatus} %{NUMBER:sc_winstatus} %{NUMBER:sc_bytes} %{NUMBER:cs_bytes} %{NUMBER:time_taken}
+iis %{IIS_DATETIME:@timestamp} %{WORD:verb} %{URIPATH:uri_stem} %{NOTSPACE:id} %{IP:user_ip} %{NOTSPACE:http} %{NUMBER:status} %{NUMBER:substatus} %{NUMBER:win32_status} %{NUMBER:time_taken}

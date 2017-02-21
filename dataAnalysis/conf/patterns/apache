@@ -1,0 +1,6 @@
+apache_access ((?:%{HOSTNAME:hostname}|%{IPV4:client_ip}) %{USER:ident} %{USER:auth} \[%{HTTPDATE:@timestamp}\] \"(?:%{WORD:method} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?)|%{DATA:rawrequest})\" %{NUMBER:response} (?:%{NUMBER:bytes}|-)( %{QS:referrer} %{QS:agent}( %{QS:site})?( %{NUMBER:read} %{NUMBER:write})?)?
+apache_error \[%{APACHE_ERROR_TIME:@timestamp}\] \[?(%{DATA})%{LOGLEVEL:loglevel}\] (?:\[client %{IPORHOST:client_ip}\] ){0,1}%{GREEDYDATA:errormsg}
+APACHE_ERROR_TIME %{DAY} %{MONTH} %{MONTHDAY} %{TIME} %{YEAR}
+apache_ssl \[%{HTTPDATE:@timestamp}\] %{IPORHOST:client_ip} %{DATA:cipher} "(%{WORD:verb}) %{NOTSPACE:request} HTTP/%{NUMBER:httpversion}" (%{NUMBER:bytes}|-)
+APACHE %{IPORHOST:c_ip} %{USER:ident} %{USER:auth} \[%{HTTPDATE:@timestamp}\] \"(?:%{WORD:method} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawrequest})\" %{NUMBER:response} (?:%{NUMBER:bytes}|-)( %{QS:referrer} %{QS:agent} %{NUMBER:read} %{NUMBER:write})?
+TOMCAT %{IPORHOST:c_ip} - %{USERNAME:remote_user} \[%{HTTPDATE:@timestamp}\] %{QS:request} %{INT:status} %{INT:body_bytes_sent}

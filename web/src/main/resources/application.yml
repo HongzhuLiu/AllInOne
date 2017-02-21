@@ -1,0 +1,20 @@
+server:
+  port: 9000
+logging:
+  #config: logback.xml
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/hongbaoapp?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    test-on-borrow: true
+    validation-query: select 1
+  thymeleaf:
+      mode: LEGACYHTML5
+      prefix: file:./web/templates/
+
+mybatis.config-location: classpath:mybatis-config.xml
+
+spring.cache.ehcache.config: classpath:ehcache.xml

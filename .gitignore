@@ -1,0 +1,21 @@
+build
+build/**
+target
+target/**
+.gradle/
+.idea
+.idea/**
+version.properties
+*.iml
+*.bak
+*-SNAPSHOT.jar
+log
+log/**
+logs/**
+*.log
+*.ser
+out
+out/**
+test
+**.DS_Store
+# end

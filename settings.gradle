@@ -1,0 +1,6 @@
+rootProject.name = 'AllInOne'
+include 'dataAnalysis'
+include 'web'
+include 'spark'
+include 'restfulServer'
+

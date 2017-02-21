@@ -1,0 +1,13 @@
+{
+  "name": "apache_err",
+  "parser": {
+    "delimit": "",
+    "fields": [],
+    "filter": [],
+    "name": "regex",
+    "parsers": [],
+    "tab": "",
+    "value": "\\[%{DATA:@timestamp}\\] \\[?(%{DATA:cause}):%{WORD:loglevel}\\] (\\[pid %{POSINT:pid}\\] ){0,1}(?:\\[client %{IPORHOST:client_ip}(:%{POSINT:client_port}){0,1}\\] ){0,1}%{GREEDYDATA:message}"
+  },
+  "sample": "[Sun Jul 24 03:37:25.228761 2016] [:error] [pid 11477] AH00000: sd_notifyf returned an error -111"
+}

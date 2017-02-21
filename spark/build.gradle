@@ -1,0 +1,65 @@
+group 'com.lhz'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext {
+        springBootVersion = '1.4.1.BUILD-SNAPSHOT'
+        scalaVersion= '2.11'
+        esVersion = '2.3.4'
+        sparkVersion = '2.0.2'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'scala'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //spark
+    compile("org.apache.spark:spark-core_$scalaVersion:$sparkVersion")
+    compile("org.apache.spark:spark-sql_$scalaVersion:$sparkVersion")
+    compile("org.apache.spark:spark-streaming_$scalaVersion:$sparkVersion")
+    compile files("lib/spark-sql-kafka-0-10_2.11-2.0.2.jar")
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.4.4'
+    //es
+    compile("org.elasticsearch:elasticsearch:$esVersion")
+    compile("org.elasticsearch:elasticsearch-spark_$scalaVersion:$esVersion")
+    compile("org.apache.hadoop:hadoop-common:2.7.2")
+    //phoenix
+    compile("org.apache.phoenix:phoenix-core:4.8.0-HBase-1.2")
+    compile("org.apache.phoenix:phoenix-spark:4.8.0-HBase-1.2")
+    compile group: 'com.google.guava', name: 'guava', version: '12.0.1'
+    //grok
+    compile group: 'io.thekraken', name: 'grok', version: '0.1.4'
+    //kafka stream
+    compile("org.apache.kafka:kafka_2.11:0.10.0.1")
+    compile("org.apache.kafka:kafka-streams:0.10.0.1")
+    //heron
+    compile group: 'com.twitter.heron', name: 'heron-storm', version: '0.14.4'
+    compile ('org.apache.calcite:calcite-core:1.8.0') {
+        exclude group: 'org.pentaho'
+    }
+    //kudu
+    compile files("lib/kudu-spark2_2.11-1.2.0-SNAPSHOT.jar")
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+//create a single Jar with all dependencies
+/*
+task fatJar(type: Jar) {
+    zip64 true
+    manifest {
+        attributes 'Implementation-Title': 'Gradle fatJar',
+                'Implementation-Version': version,
+                'Main-Class': 'streaming.KafkaSource'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+*/

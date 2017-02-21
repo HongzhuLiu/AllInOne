@@ -1,0 +1,12 @@
+# Forked from https://github.com/elasticsearch/logstash/tree/v1.4.0/patterns
+SYSLOGPAMSESSION %{SYSLOGBASE} (?=%{GREEDYDATA:message})%{WORD:pam_module}\(%{DATA:pam_caller}\): session %{WORD:pam_session_state} for user %{USERNAME:username}(?: by %{GREEDYDATA:pam_by})?
+
+CRON_ACTION [A-Z ]+
+ACCESS_SECURE (port %{NUMBER:port}) %{WORD:secure}
+MESSAGE1 %{MESSAGE3}from %{IPORHOST:visit_ip}
+MESSAGE2 %{MESSAGE1} %{ACCESS_SECURE}
+MESSAGE3 %{NOTSPACE}.*
+syslog_secure %{SYSLOGBASE} (%{MESSAGE2:message}|%{MESSAGE1:message}|%{MESSAGE3:message})
+syslog_cron %{SYSLOGBASE} \(%{USER:user}\) %{CRON_ACTION:action} \(%{DATA:message}\)
+syslog %{SYSLOGTIMESTAMP:@timestamp} %{GREEDYDATA:message}
+syslog_linux %{SYSLOGTIMESTAMP:@timestamp} %{SYSLOGHOST:syslog_hostname}( %{DATA:syslog_program}(?:\[%{POSINT:syslog_pid}\])?:)? %{GREEDYDATA:syslog_message}

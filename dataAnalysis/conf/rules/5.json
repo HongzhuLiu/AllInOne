@@ -1,0 +1,13 @@
+{
+  "name": "XML格式解析示例",
+  "parser": {
+    "delimit": "",
+    "fields": [],
+    "filter": [],
+    "name": "xml",
+    "parsers": [],
+    "tab": "",
+    "value": ""
+  },
+  "sample": "<statement>\n        <rule_id>1</rule_id>\n        <alarm_name>非时序事件测试</alarm_name>\n        <alarm_level>2</alarm_level>\n        <alarm_type>/networksec</alarm_type>\n        <alarm_stage>1</alarm_stage>\n        <alarm_content>账号遭受暴力破解</alarm_content>\n</statement>"
+}

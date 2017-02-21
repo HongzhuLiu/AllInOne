@@ -1,0 +1,117 @@
+{
+  "name": "apache_access",
+  "parser": {
+    "delimit": "",
+    "fields": [],
+    "filter": [
+      {
+        "cases": [],
+        "field": "",
+        "fields": [
+          {
+            "value": "%{request_origin}",
+            "key": "request"
+          },
+          {
+            "value": "%{request_origin}",
+            "key": "request_uri"
+          },
+          {
+            "value": "%{request_origin}",
+            "key": "request_url"
+          }
+        ],
+        "from": "",
+        "name": "addFields",
+        "ref": "",
+        "sep": "",
+        "to": ""
+      },
+      {
+        "cases": [
+          {
+            "rule": {
+              "ref": 2,
+              "field": "request_origin",
+              "name": "analyzer",
+              "from": "",
+              "to": "",
+              "fields": [
+                {}
+              ],
+              "sep": ""
+            },
+            "value": "?"
+          }
+        ],
+        "field": "request_origin",
+        "fields": [
+          {}
+        ],
+        "from": "",
+        "name": "contain",
+        "ref": 20,
+        "sep": "",
+        "to": ""
+      },
+      {
+        "cases": [],
+        "field": "",
+        "fields": [
+          {
+            "value": "%{client_ip}",
+            "key": "client_ip_raw"
+          },
+          {
+            "value": "%{request_url}",
+            "key": "request_uri"
+          }
+        ],
+        "from": "",
+        "name": "addFields",
+        "ref": "",
+        "sep": "",
+        "to": ""
+      },
+      {
+        "cases": [],
+        "field": "ip_request",
+        "fields": [
+          {
+            "value": "client_ip_raw"
+          },
+          {
+            "value": "request_url"
+          }
+        ],
+        "from": "",
+        "name": "merger",
+        "ref": 20,
+        "sep": " ",
+        "to": ""
+      },
+      {
+        "cases": [],
+        "field": "",
+        "fields": [
+          {
+            "value": "request_param"
+          },
+          {
+            "value": "request_origin"
+          }
+        ],
+        "from": "",
+        "name": "removeFields",
+        "ref": 20,
+        "sep": "",
+        "to": ""
+      }
+    ],
+    "name": "regex",
+    "parsers": [],
+    "tab": "",
+    "value": "%{IPORHOST:client_ip} %{USER:identity} %{USER:auth} \\[%{HTTPDATE:@timestamp}\\] \\\"(?:%{WORD:method} %{GREEDYDATA:request_origin} %{NOTSPACE:http_version}?|%{GREEDYDATA:request_origin})\\\" %{NUMBER:status} (?:%{NUMBER:bytes}|-)( \\\"%{DATA:referer}\\\" \\\"%{DATA:user_agent}\\\")?( %{NUMBER:read_bytes} %{NUMBER:write_bytes})?"
+  },
+  "sample": "203.208.60.171 - - [17/Jun/2016:03:31:12 +0800] \"GET /blog-elasticsearch-data-loss-scenarios.html HTTP/1.1\" 304 - \"-\" \"Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)\""
+}

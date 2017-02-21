@@ -1,0 +1,93 @@
+{
+  "name": "Json日志解析示例",
+  "parser": {
+    "delimit": "",
+    "fields": [],
+    "filter": [
+      {
+        "cases": [],
+        "field": "",
+        "fields": [
+          {
+            "value": "server_ip",
+            "key": "s-ip"
+          },
+          {
+            "value": "method",
+            "key": "cs-method"
+          },
+          {
+            "value": "client_ip",
+            "key": "c-ip"
+          },
+          {
+            "value": "port",
+            "key": "s-port"
+          },
+          {
+            "value": "user_agent",
+            "key": "csUser-Agent"
+          },
+          {
+            "value": "request",
+            "key": "cs-uri-stem"
+          },
+          {
+            "value": "@timestamp",
+            "key": "EventReceivedTime"
+          },
+          {
+            "value": "status",
+            "key": "cs-Referer"
+          },
+          {
+            "value": "sc_winstatus",
+            "key": "sc-win32-status"
+          }
+        ],
+        "from": "",
+        "name": "mapping",
+        "ref": 20,
+        "sep": "",
+        "to": ""
+      },
+      {
+        "cases": [],
+        "field": "",
+        "fields": [
+          {
+            "value": "date"
+          },
+          {
+            "value": "time"
+          },
+          {
+            "value": "cs-uri-query"
+          },
+          {
+            "value": "sc-status"
+          },
+          {
+            "value": "SourceModuleType"
+          },
+          {
+            "value": "SourceModuleName"
+          },
+          {
+            "value": "SourceName"
+          }
+        ],
+        "from": "",
+        "name": "removeFields",
+        "ref": 20,
+        "sep": "",
+        "to": ""
+      }
+    ],
+    "name": "json",
+    "parsers": [],
+    "tab": "",
+    "value": ""
+  },
+  "sample": "{\"EventReceivedTime\":\"2016-10-19 16:33:47\",\"SourceModuleName\":\"IIS_Site1\",\"SourceModuleType\":\"im_file\",\"date\":\"2016-10-19\",\"time\":\"08:33:24\",\"s-ip\":\"172.18.123.140\",\"cs-method\":\"GET\",\"cs-uri-stem\":\"/\",\"cs-uri-query\":null,\"s-port\":80,\"cs-username\":null,\"c-ip\":\"172.18.123.141\",\"csUser-Agent\":\"curl/7.29.0\",\"cs-Referer\":\"200\",\"sc-status\":0,\"sc-substatus\":0,\"sc-win32-status\":0,\"SourceName\":\"IIS\"}"
+}

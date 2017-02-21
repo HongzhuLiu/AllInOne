@@ -1,0 +1,9 @@
+NGINX %{IPORHOST:c_ip} - %{USERNAME:remote_user} \[%{HTTPDATE:@timestamp}\] %{QS:request} %{INT:status} %{INT:body_bytes_sent} %{QS:http_referer} %{QS:http_user_agent}
+NGINX_TYPE1 %{IPORHOST:client_ip} (?:%{WORD:ident}|-) (?:%{WORD:auth}|-) \[%{NGINX_DATETIMA:@timestamp}\] "%{WORD:verb} %{GREEDYDATA:request} HTTP/%{NUMBER:httpversion}" %{NUMBER:response} (?:%{NUMBER:bytes}|-) "(?:%{URI:referrer}|-)" "%{DATA:agent}"
+NGINX_TYPE2 %{IPORHOST:client_ip} (?:%{WORD:ident}|-) (?:%{WORD:auth}|-) \[%{NGINX_DATETIMA:@timestamp}\]\s+%{NUMBER:response} "%{WORD:verb} %{GREEDYDATA:request} HTTP/%{NUMBER:httpversion}" (?:%{NUMBER:bytes}|-) "(?:%{URI:referrer}|-)" "%{DATA:agent}"
+NGINC_TYPE3 %{IPORHOST:client_ip} (?:%{WORD:ident}|-) (?:%{WORD:auth}|-) \[%{NGINX_DATETIMA:@timestamp}\]\s+%{NUMBER:response} "%{GREEDYDATA:request}" (?:%{NUMBER:bytes}|-) "(?:%{URI:referrer}|-)" "(?:%{DATA:agent})"
+nginx_access %{NGINX_TYPE3}|%{NGINX_TYPE2}|%{NGINX_TYPE1}
+nginx_error %{NGINXTIMESTAMP:@timestamp} \[(?:%{LOGLEVEL:verb}|-)\] %{PORT}: \*%{NUMBER} %{GREEDYDATA:error_message} (client: %{DATA:client_ip}), (server: %{DATA:server}), (request: %{GREEDYDATA:request})
+NGINXTIMESTAMP %{YEAR}[/]%{MONTHNUM}[/]%{MONTHDAY} %{TIME}
+PORT %{NUMBER}#%{NUMBER}
+NGINX_DATETIMA %{MONTHDAY}/%{MONTH}/%{YEAR}:%{TIME} [- +]%{INT}

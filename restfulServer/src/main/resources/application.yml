@@ -1,0 +1,25 @@
+server:
+  port: 9000
+logging:
+  #config: logback.xml
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    test-on-borrow: true
+    validation-query: select 1
+  oauth2:
+      client:
+        accessTokenUri: http://localhost:9000/oauth/token
+        clientId: clientapp
+        clientSecret: 123456
+        scope: read,write
+
+mybatis.config-location: classpath:mybatis-config.xml
+
+multipart:
+  max-file-size: 10Mb
+  max-request-size: 10Mb

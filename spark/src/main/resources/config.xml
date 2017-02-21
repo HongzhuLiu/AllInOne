@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurations>
+    <spark>
+        <master>local[2]</master>
+        <appName>SparkEngine</appName>
+    </spark>
+    <elastcisearch>
+        <nodes>localhost</nodes>
+        <port>9200</port>
+    </elastcisearch>
+    <!--计算类型：计数、求和、平均，基线，频率，速率，比率-->
+    <task>
+        <input>
+            <index>saas_20161117</index>
+            <type>web</type>
+            <table>web</table>
+            <query>{"query":{"filtered":{ "query":{"match_all":{}},"filter": { "and" : [ {"range":{"@timestamp":{"gt":startTime}}},{"range":{"@timestamp":{"lte":endTime}}} ] } }}}</query>
+            <startTime></startTime>
+            <endTime></endTime>
+        </input>
+        <output>
+            <index>spark</index>
+            <type>web</type>
+        </output>
+        <sql>select * from web</sql>
+        <window>
+            <windowLength>5</windowLength>
+            <slideInterval>1</slideInterval>
+        </window>
+    </task>
+</configurations>

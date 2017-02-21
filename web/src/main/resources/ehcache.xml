@@ -1,0 +1,11 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd">
+    <cache name="users"
+           maxEntriesLocalHeap="200"
+           timeToLiveSeconds="100">
+    </cache>
+    <cache name="customers"
+           maxEntriesLocalHeap="200"
+           timeToLiveSeconds="100">
+    </cache>
+</ehcache>

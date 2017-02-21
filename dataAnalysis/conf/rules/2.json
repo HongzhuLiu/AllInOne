@@ -1,0 +1,20 @@
+{
+  "name": "request_param",
+  "parser": {
+    "delimit": "\\?",
+    "fields": [
+      {
+        "value": "request_url"
+      },
+      {
+        "value": "request_param"
+      }
+    ],
+    "filter": [],
+    "name": "delimit",
+    "parsers": [],
+    "tab": "",
+    "value": ""
+  },
+  "sample": "/js/modernizr.custom.js?v=1.0"
+}

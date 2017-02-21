@@ -1,0 +1,1 @@
+yum_log %{SYSLOGTIMESTAMP:@timestamp} (%{WORD:action}:) %{NOTSPACE:software}

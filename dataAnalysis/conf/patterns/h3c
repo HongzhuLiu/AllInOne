@@ -1,0 +1,2 @@
+H3CTIMESTAMP %{NAMED_MONTH} %{NAMED_MONTH_DAY} %{TIME} %{NAMED_YEAR}
+h3c_log %{H3CTIMESTAMP:@timestamp} %{WORD:device} %{NOTSPACE:operate} %{DATA:message}

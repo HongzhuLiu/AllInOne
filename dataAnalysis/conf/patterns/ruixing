@@ -1,0 +1,4 @@
+codes_ruixing %{NOTSPACE} \[%{NOTSPACE}\]%{NOTSPACE}?:\s*%{NOTSPACE:event_type}
+SCAN %{NOTSPACE:computer} \[%{NOTSPACE}\]%{NOTSPACE}?:\s*%{NOTSPACE:event_type} %{NOTSPACE}?:\s*%{NOTSPACE:event_level} %{NOTSPACE}?:\s*%{DATA:event_info} %{NOTSPACE}?:\s*%{NOTSPACE:computer_name} %{NOTSPACE}?:\s*%{IP:ipaddress} %{NOTSPACE}?:\s*%{NOTSPACE:reportor} %{NOTSPACE}?:\s*%{TIMESTAMP_ISO8601:date}
+REPORT %{NOTSPACE:computer} \[%{NOTSPACE}\]%{NOTSPACE}?:\s*%{NOTSPACE:event_type} %{NOTSPACE}?:\s*%{NOTSPACE:virus_type} %{NOTSPACE}?:\s*%{NOTSPACE:result} %{NOTSPACE}?:\s*%{NOTSPACE:finder} %{NOTSPACE}?:\s*%{NOTSPACE:files} %{NOTSPACE}?:\s*%{NOTSPACE:infected_path} %{NOTSPACE}?:\s*%{TIMESTAMP_ISO8601:date} %{NOTSPACE}?:\s*%{NOTSPACE:computer_name} %{NOTSPACE}?:\s*%{IPORHOST:ip}
+ruixing %{REPORT}|%{SCAN}
