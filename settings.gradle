@@ -3,4 +3,5 @@ include 'dataAnalysis'
 include 'web'
 include 'spark'
 include 'restfulServer'
+include 'flink'
 

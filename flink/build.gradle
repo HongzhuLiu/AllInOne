@@ -1,0 +1,27 @@
+group 'com.lhz'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext {
+        scalaVersion= '2.11'
+        flinkVersion ='1.2.0'
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'scala'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.apache.flink:flink-core:$flinkVersion")
+    compile("org.apache.flink:flink-scala_$scalaVersion:$flinkVersion")
+    compile("org.apache.flink:flink-clients_$scalaVersion:$flinkVersion")
+    compile("org.apache.flink:flink-streaming-scala_$scalaVersion:$flinkVersion")
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
