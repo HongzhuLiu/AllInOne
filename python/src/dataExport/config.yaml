@@ -1,0 +1,11 @@
+es:
+  hosts: http://172.16.100.212:9200
+  index: event_*
+  startTime: 2017-04-06 11:00:00
+  endTime:
+  originalLogField: original_log
+  timestampField: occur_time
+
+enterprise:
+  ip: 172.16.100.131
+  port: 514
