@@ -1,0 +1,6 @@
+enterprise:
+  ip: 172.16.100.131
+  port: 514
+
+zip:
+  filePath: C:\Users\LHZ\Desktop\zips

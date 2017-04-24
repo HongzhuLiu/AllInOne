@@ -7,6 +7,7 @@
         <package name="com.lhz.entity"/>
     </typeAliases>
     <mappers>
+        <mapper resource="mapper/ParseRuleMapper.xml"/>
         <mapper resource="mapper/UserMapper.xml"/>
     </mappers>
 </configuration>

@@ -8,10 +8,10 @@ import yaml
 import sys
 import os
 
-logging.config.fileConfig("logging.conf")
+logging.config.fileConfig("conf/logging.conf")
 logger = logging.getLogger("dataExport")
 
-config = yaml.load(file('config.yaml'))
+config = yaml.load(file('conf/es_to_udp.yaml'))
 hosts = config["es"]["hosts"]
 index = config["es"]["index"]
 startTime = config["es"]["startTime"]
@@ -36,18 +36,23 @@ def writeTimeFlag(startTimeStamp):
         file.close()
 
 def readTimeFlag():
-    try:
-        file = open(timeFlagFile,"r")
-        logger.info("读取查询时间点:"+str(startTimeStamp))
-        return file.readline()
-    except:
-        logger.error("读取查询时间点失败")
-    finally:
-        file.close()
+    if os.path.exists(timeFlagFile):
+        try:
+            file = open(timeFlagFile,"r")
+            time=file.readline()
+            logger.info("读取查询时间点:"+str(time))
+            return long(time)
+        except:
+            logger.error("读取查询时间点失败")
+        finally:
+            file.close()
+    else:
+        return 0
 
-startTimeStamp = 0
-if startTime != None:
+startTimeStamp = readTimeFlag()
+if startTimeStamp==0 and startTime != None:
     startTimeStamp = int(time.mktime(startTime.timetuple())*1000)
+logger.info("开始读取时间点:"+str(startTimeStamp))
 
 endTimeStamp = -1
 if endTime != None:
@@ -80,7 +85,7 @@ def queryData(startTimeStamp,endTimeStamp):
 #查询间隔(s)
 intervalTime=5*1000;
 while(1):
-    startTimeStamp = long(readTimeFlag())
+    startTimeStamp = readTimeFlag()
     tEndTimeStamp=startTimeStamp+intervalTime;
     if endTime == None:
         endTimeStamp = int(time.time()*1000)
